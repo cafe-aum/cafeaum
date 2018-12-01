@@ -1,0 +1,1 @@
+!function(){"use strict";angular.module("cafeyoga.restaurant",["cafeyoga.restaurant.controllers","cafeyoga.restaurant.services"]);angular.module("cafeyoga.restaurant.controllers",["cafeyoga.authentication.services"]),angular.module("cafeyoga.restaurant.services",[])}();

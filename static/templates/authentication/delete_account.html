@@ -1,0 +1,64 @@
+<div class="cy-contour-white">
+    <div class="cy-contour">
+        <div class="cy-container">
+            <div ng-include="'/static/templates/general/navbar.html'"></div>
+            <div class="main-container" style="min-height:100%;">
+                <div style="margin: 25% auto 25% auto;" ng-if="!state.loaded">
+                    <md-progress-circular
+                            md-mode="indeterminate"
+                            style="margin: auto;">
+                    </md-progress-circular>
+                </div>
+                <div ng-if="state.loaded" layout="column" flex-offset="20" flex="60">
+                    <h4 class="text-centered" style="margin-top:150px; margin-bottom:2%;color:red;">
+                        Vous êtes sur le point de supprimer votre compte CafeAum. <br><br>
+                        En cliquant sur "Confirmer", votre compte sera effectivement supprimé, et vos éventuels crédits perdus.
+                    </h4>
+                    <h4 class="text-centered" style="color:red; margin-top:15px; margin-bottom:2%;">
+                        Souhaitez-vous continuer ?
+                    </h4>
+                    <div style="margin: 2% auto 15% auto;" layout="column" flex="40">
+                        <div class="alert alert-success" ng-show="success" ng-bind="success"></div>
+                        <div style="color:red;" class="alert alert-danger" ng-show="error" ng-bind="error"></div>
+                        <form ng-show="!success" role="form">
+                            <div class="form-group">
+                                <label for="settings_password">Mot de passe</label>
+                                <input name="pwd"
+                                       type="password"
+                                       class="form-control"
+                                       id="settings_password"
+                                       ng-model="data.password"
+                                       ng-required="1"
+                                       placeholder="Mot de passe *"
+                                       oninvalid="this.setCustomValidity('Champ obligatoire')"
+                                       oninput="setCustomValidity('')"
+                                       ng-change="changeForm()"/>
+                            </div>
+                            <div style="margin: 5% auto 0 auto;" layout="column" layout-align="center center">
+                                <md-button
+                                        ng-if="!success"
+                                        ng-click="cancelDeletion()"
+                                        class="md-primary md-raised cy-button">
+                                    Retour
+                                </md-button>
+                                <md-button ng-if="!success"
+                                           style="margin: 5% auto 0 auto;"
+                                           ng-click="processDeletion()"
+                                           class="md-primary md-raised cy-button">
+                                    Confirmer
+                                </md-button>
+                            </div>
+                        </form>
+                        <md-button
+                                ng-if="success"
+                                ng-click="cancelDeletion()"
+                                class="md-primary md-raised cy-button">
+                            Retour à l'accueil
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'/static/templates/general/footer.html'"></div>
+    </div>
+</div>

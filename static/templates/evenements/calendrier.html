@@ -1,0 +1,116 @@
+<div class="cy-contour-white">
+    <div class="cy-contour">
+        <div class="cy-container">
+            <div ng-include="'/static/templates/general/navbar.html'"></div>
+            <div class="main-container" style="margin-top:150px;">
+               <div layout>
+                    <div style="width:200px;" ng-include="'/static/templates/general/sidenav.html'"></div>
+
+                    <div flex layout-padding style="background-color:#fffdfa;font-size:20px; margin-top:0px;">
+                        <div ng-if="(evenements | isEmptyArray)">
+                            <h1 class="text-centered">Rien en ce moment</h1>
+                        </div>
+                        <div ng-if="!state.showDetails">
+                            <div class="cy-exposition"
+                                 layout layout-align="center center" ng-repeat="evenement in evenements" style="margin-bottom:60px;">
+                                <div layout="column" flex="90" layout-align="space-between start"
+                                     style="border: 1px solid #3f3f3f;padding:10px;border-radius:10px;">
+                                    <div layout layout-align="start start" style="width:100%; margin-bottom:30px;"
+                                         layout-md="column">
+                                        <div style="margin-bottom:30px;">
+                                            <img src="{{ evenement.image}}"
+                                                 alt="Evenement"
+                                                 style="max-height:200px; height:auto; width:auto; float: right;"/>
+                                        </div>
+                                        <div layout="column"
+                                             flex="100"
+                                             layout-align="space-between start"
+                                             layout-align-md="space-between start"
+                                             style="margin:0 20px;width:100%;">
+                                            <h2 class="text-centered">{{evenement.titre}}</h2>
+                                            <h4>{{evenement.locale_date}} de {{evenement.heure_debut}} à {{evenement.heure_fin}}</h4>
+                                            <h4>{{evenement.summary}}</h4>
+
+                                            <h4 ng-if="evenement.prix > 0">Participation : {{evenement.prix}} €</h4>
+                                            <h4 ng-if="evenement.prix == 0">Entrée libre</h4>
+                                            <a href="{{evenement.lien}}">Voir l'évènement sur Facebook</a>
+                                        </div>
+                                    </div>
+                                    <div layout layout-align="space-between start" style="padding:0 20px;width:100%;">
+                                        <p style="font-size:80%; font-style:italic; color:#574128; margin:auto 15px auto 0;">
+                                            {{ evenement.didascalie }}
+                                        </p>
+
+                                        <md-button ng-click="showDetails(evenement)"
+                                                   class="md-primary md-raised cy-button">
+                                            Voir l'évènement
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div ng-if="state.showDetails">
+                            <div class="cy-exposition">
+                                <h2 class="text-centered" style="margin-bottom:5%; color:#5D3B0A;">{{event_to_show.titre}}</h2>
+                                <div layout layout-align="space-between start" layout-md="column">
+                                    <div style="margin-bottom:30px;">
+                                        <img src="{{ event_to_show.image}}"
+                                             alt="Evenement"
+                                             style="max-height:250px; height:250px; width:auto; float: right;"/>
+                                    </div>
+                                    <div layout="column" flex="100" layout-align="space-between start" style="margin:0 20px;width:100%;">
+                                        <h4>{{event_to_show.locale_date}}</h4>
+                                        <h4>{{event_to_show.prix}} €</h4>
+                                        <p>{{event_to_show.texte}}</p>
+                                    </div>
+                                </div>
+                                <div layout layout-align="space-between start" style="padding:0 20px;width:100%;">
+                                    <p style="font-size:80%; font-style:italic; color:#574128;  margin:auto 15px auto 0;">
+                                        {{ passe.didascalie }}
+                                    </p>
+
+                                </div>
+                                <div layout layout-align="end end">
+                                    <md-button ng-click="hideDetails()"
+                                               class="md-primary md-raised cy-button">
+                                        Retour
+                                    </md-button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>-->
+                    <div ng-if="state.showDetails">
+                        <div class="cy-exposition" style="margin-top:-100px;">
+                            <h2 class="text-centered" style="margin-bottom:5%; color:#5D3B0A;">{{event_to_show.titre}}</h2>
+                            <div layout layout-align="space-between start" layout-md="column">
+                                <div style="margin-bottom:30px;">
+                                    <img src="{{ event_to_show.image}}"
+                                         alt="Evenement"
+                                         style="max-height:250px; height:250px; width:auto; float: right;"/>
+                                </div>
+                                <div layout="column" flex="100" layout-align="space-between start" style="margin:0 20px;width:100%;">
+                                    <h4>{{event_to_show.locale_date}} de {{event_to_show.heure_debut}} à {{event_to_show.heure_fin}}</h4>
+                                    <p>{{event_to_show.texte}}</p>
+                                    <h4 ng-if="event_to_show.prix > 0">Participation : {{event_to_show.prix}} €</h4>
+                                    <h4 ng-if="event_to_show.prix == 0">Entrée libre</h4>
+                                    <a href="{{event_to_show.lien}}">Voir l'évènement sur Facebook</a>
+                                </div>
+
+                            </div>
+                            <div layout layout-align="end end">
+                                <md-button ng-click="hideDetails()"
+                                           class="md-primary md-raised cy-button">
+                                    Retour
+                                </md-button>
+                            </div>
+
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'/static/templates/general/footer.html'"></div>
+    </div>
+</div>
+

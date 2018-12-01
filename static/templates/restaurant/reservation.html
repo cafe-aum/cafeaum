@@ -1,0 +1,172 @@
+<div class="cy-contour-white">
+    <div class="cy-contour">
+        <div class="cy-container">
+            <div ng-include="'/static/templates/general/navbar.html'"></div>
+            <div class="main-container" style="margin-top:150px;">
+                <div layout>
+                    <div style="width:200px;" ng-include="'/static/templates/general/sidenav.html'" style="min-width:300px;"></div>
+                    <div style="margin:-50px auto 50px auto; width:100%;">
+                        <div layout="column" layout-align="space-between center"
+                             flex="80" flex-offset="10">
+                            <p class="text-centered" style="font-size:18px;font-style:italic;margin-top:-50px;">
+                                Envie de déjeuner dans notre restaurant, aujourd’hui ?<br>
+                                Nous vous invitons à nous contacter par téléphone au 01 XX XX XX XX.<br><br>
+                                Pour réserver une table demain ou plus tard, vous pouvez aussi nous envoyer votre
+                                demande en remplissant ce formulaire, et nous reviendrons vers vous dans les plus brefs délais.
+                            </p>
+                        </div>
+                        <div>
+                            <div ng-if="fermetures_days.length > 1">
+                                <div layout style="margin-bottom:5%;">
+                                    <md-icon style="font-size:30px; color: orange; vertical-align: middle;margin:  auto;">
+                                        warning
+                                    </md-icon>
+                                    <div style="font-size:20px; font-style: bold; margin-left:20px;">
+                                        Fermeture exceptionnelle du {{ fermetures_days[0] }} au {{ fermetures_days[1] }} inclus
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="fermetures_days.length == 1">
+                                <div class ="row">
+                                    <i class="fa fa-warning" style="font-size:30px;color:orange"></i>
+                                    <div style="font-size:20px; font-style: bold; margin-bottom:5%;">
+                                        Fermeture exceptionnelle le {{ fermetures_days[0] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <form layout="column" layout-align="space-between center"
+                                      flex="100" flex-offset="0"
+                                      role="form"
+                                      ng-submit="reservation()"
+                                      name="reservation_form">
+                                    <div  style="font-size:26px; border: 1px solid red; background-color : #f2f2f2; color:red;"
+                                          class="alert alert-danger" ng-show="error" ng-bind="error">
+                                    </div>
+                                    <div style="font-size:26px; border: 1px solid green; background-color : #f2f2f2; color:green;"
+                                         class="alert alert-danger" ng-show="success" ng-bind="success">
+                                    </div>
+                                    <div layout="column">
+                                        <div layout layout-align="space-between center">
+                                            <md-input-container id="restaurant__selected_date">
+                                                <md-select class="form-control quicksand-md"
+                                                           validate-on="submit"
+                                                           ng-required="1"
+                                                           style="font-size:20px;"
+                                                           ng-model="selectedDate"
+                                                           placeholder="Quel jour ?"
+                                                           ng-change="changeDay()">
+                                                    <md-select-header>
+                                                        <span  style="font-size:20px;"> Sélectionnez un jour </span>
+                                                    </md-select-header>
+                                                    <md-option ng-value="day.locale" ng-repeat="day in select_day_list">{{ day.locale }}</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <md-input-container id="restaurant__selected_hour">
+                                                <md-select class="form-control"
+                                                           validate-on="submit"
+                                                           ng-required="1"
+                                                           style="font-size:20px;"
+                                                           ng-model="selectedHour"
+                                                           placeholder="Quelle heure ?"
+                                                           ng-change="changeHour()">
+                                                    <md-select-header>
+                                                        <span  style="font-size:20px;"> Sélectionnez une heure </span>
+                                                    </md-select-header>
+                                                    <md-option ng-value="slot" ng-repeat="slot in selected_day_hours">{{ slot }}</md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                        </div>
+                                        <div layout layout-align="space-between center">
+                                            <md-input-container style="width:50%; margin: auto;">
+                                                <md-select ng-required="1"
+                                                           style="font-size:20px; vertical-align: middle;"
+                                                           ng-model="selectedNumberOfPersons"
+                                                           placeholder="Pour combien ?"
+                                                           ng-change="changeNbPersons()">
+                                                    <md-select-header>
+                                                        <span  style="font-size:20px;"> Pour combien ? </span>
+                                                    </md-select-header>
+                                                    <md-option ng-value="n"
+                                                               ng-repeat="n in number_of_persons">
+                                                        {{ n }} <span>personne<span ng-if="n>1">s</span>
+                                                            </span>
+
+                                                    </md-option>
+                                                </md-select>
+                                            </md-input-container>
+                                            <h4 ng-if="0"
+                                                style="vertical-align: middle;">
+                                                personne<span ng-if="selectedNumberOfPersons>1">s</span></h4>
+                                        </div>
+                                    </div>
+                                    <!--<h3 style="margin-top:2%; margin-bottom:3%;">Vos informations personnelles :</h3>-->
+                                    <div layout layout-align="space-between center" style="width:75%;">
+                                        <div layout="column" layout-align="space-between center" flex="70"
+                                              >
+                                            <div style="margin-top:2%;width:70%;" class="form-group reservation-input">
+                                                <label class="quicksand-md" for="reservation_nom">Nom (obligatoire)</label>
+                                                <input style="font-size:20px; background-color:#f8e4c8;"
+                                                       name="nom"
+                                                       type="text"
+                                                       class="form-control"
+                                                       id="reservation_nom"
+                                                       ng-model="reservation_nom"
+                                                       ng-required="1"
+                                                       validate-on="submit"
+                                                       oninvalid="this.setCustomValidity('Champ obligatoire')"
+                                                       oninput="setCustomValidity('')"
+                                                       ng-change="changeForm()"/>
+                                            </div>
+                                            <div class="form-group reservation-input" style="width:70%;">
+                                                <label class="quicksand-md"  for="reservation_email">Email (obligatoire)</label>
+                                                <input style="font-size:20px; background-color:#f8e4c8;"
+                                                       name="email"
+                                                       type="email"
+                                                       class="form-control"
+                                                       id="reservation_email"
+                                                       ng-model="reservation_email"
+                                                       ng-required="1"
+                                                       oninvalid="this.setCustomValidity('Champ obligatoire')"
+                                                       oninput="setCustomValidity('')"
+                                                       ng-change="changeForm()"/>
+                                            </div>
+                                            <div class="form-group reservation-input" style="width:70%;">
+                                                <label class="quicksand-md" for="reservation_tel">Téléphone (optionnel)</label>
+                                                <input style="font-size:20px; background-color:#f8e4c8;"
+                                                       type="text"
+                                                       class="form-control"
+                                                       id="reservation_tel"
+                                                       ng-model="reservation_tel"
+                                                       ng-change="changeForm()"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group reservation-input" style="width:80%; height:200px;">
+                                            <label class="quicksand-md" for="reservation_comment">Commentaire (optionnel)</label>
+                                            <textarea  style="font-size:20px; background-color:#f8e4c8;min-height:100%;height:200px;"
+                                                       id="reservation_comment"
+                                                       ng-model="reservation_comment"
+                                                       class="form-control"
+                                                       ng-change="changeForm()"/>
+                                        </div>
+                                    </div>
+
+
+                                    <div style="margin: 0 auto;" class="form-group">
+                                        <md-button
+                                                type="submit"
+                                                class="md-primary md-raised cy-button">
+                                            Réserver
+                                        </md-button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'/static/templates/general/footer.html'"></div>
+    </div>
+</div>

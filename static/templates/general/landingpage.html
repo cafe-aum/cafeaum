@@ -1,0 +1,287 @@
+<div class="fullsize-fixed" ng-controller="LandingPageController as vm">
+    <div class="fullsize-contour-white">
+        <div class="fullsize-contour-marron">
+
+            <!-- Desktop display (large screen) -->
+            <div hide-xs hide-sm hide-md class="fullsize-container" layout="column">
+                <div layout="row" layout-align="space-around center"  style="height:100%;">
+                    <div layout="column" flex="35" layout-align="space-between end" style="min-height:100%;">
+                        <div class="landingpage-item">
+                            <a class="portfolio-link" data-toggle="modal" href="/restaurant/carte">
+                                <div class="portfolio-hover" style="background: #879860;"></div>
+                                <img class="img-fluid restaurant-img" style="max-width:95%;"  src="/static/img/landingpage/RESTAURANT.png" alt="Restaurant">
+                                <div class="portfolio-centered">Restaurant</div>
+                            </a>
+                        </div>
+                        <div class="landingpage-item">
+                            <a class="portfolio-link" data-toggle="modal" href="/boutique">
+                                <div class="portfolio-hover"  style="background: #b47a3c;"></div>
+                                <img class="img-fluid boutique-img" style="max-width:95%;"  src="/static/img/landingpage/BOUTIQUE.png" alt="Exposition">
+                                <div class="portfolio-centered">Boutique</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div layout="column" flex="15" flex-offset="0" layout-align="space-between center"
+                         style="font-family:Tillana;background-color: #879860;color: white; padding: 18px 5px 0 5px; height:100%;min-height:100%;">
+                        <a class="logo-link" href="/" >
+                            <img class="img-fluid logo" style="margin: 0 auto;" src="/static/img/logo.png" alt="CafeYoga">
+                        </a>
+
+                        <div layout="column">
+                            <div ng-if="!(account|isEmpty)">
+                                <div layout="column" style="margin-top: 5%; margin-bottom:15%;">
+                                    <a class="landingpage-link" href="/settings">
+                                        <h4 class="landingpage-link-text text-centered"
+                                            style="color:white;text-transform: uppercase;margin-bottom:2%;word-wrap: break-word;">{{display_name}}</h4>
+                                    </a>
+
+                                    <md-button ng-click="logout()"
+                                               class=""
+                                               style="min-width:50px; padding-right: 10px;padding-left: 10px; margin: auto;">
+                                        <md-icon md-font-icon="material-icons"
+                                                 ng-click="logout()"
+                                                 class="landingpage-link-text"
+                                                 style="color:white;">power_settings_new
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                            <a ng-if="(account|isEmpty)" class="landingpage-link" href="/monespace">
+                                <h4 class="landingpage-link-text  text-centered" style="padding: 2% 0;color:white;text-transform: uppercase;margin-bottom:15%;"> Mon compte </h4>
+                            </a>
+                            <a class="landingpage-link" href="/presentation">
+                                <h4 class="landingpage-link-text  text-centered"
+                                    style="padding: 2% 0;color:white;text-transform: uppercase; margin-bottom:15%;"> Qui sommes nous ? </h4>
+                            </a>
+                            <!--
+                            <a class="landingpage-link" href="/galeriephotos">
+                                <h4 class="text-centered" style="padding: 2% 0;color:white;font-size:16px;text-transform: uppercase;margin-bottom:15%;"> Galerie photos </h4>
+                            </a>
+                            -->
+                            <a class="landingpage-link" href="/contact">
+                                <h4 class="landingpage-link-text text-centered" style="padding: 2% 0;color:white;text-transform: uppercase;margin-bottom:15%;"> Contact </h4>
+                            </a>
+
+
+                            <!--
+                            <a class="landingpage-link" href="/presentation">
+                                <h4 class="text-centered"
+                                    style="padding: 2% 0;color:white;font-size:19px;text-transform: uppercase; margin-bottom:15%;font-weight:900;"> Participer à notre campagne de crowdfunding </h4>
+                            </a>-->
+                        </div>
+                        <a class="landingpage-link-md" href="/mentions">
+                            <h4 class="landingpage-link-text text-centered"
+                                style="padding: 0% 0;color:white;text-transform: uppercase;margin-bottom:10%;"> Mentions légales
+                            </h4>
+                        </a>
+                    </div>
+                    <div layout="column" flex="35" flex-offset="0" layout-align="space-between start" style="height:48%;min-height:100%;">
+                        <div class="landingpage-item" >
+                            <a class="portfolio-link" data-toggle="modal" href="/yoga/calendrier">
+                                <div class="portfolio-hover" style="background: #54622e;"></div>
+                                <img class="img-fluid yoga-img" style="max-width:95%;"  src="/static/img/landingpage/YOGA.png" alt="Yoga">
+                                <div class="portfolio-centered">Yoga</div>
+                            </a>
+                        </div>
+                        <div class="landingpage-item" >
+                            <a class="portfolio-link" data-toggle="modal" href="/evenements/calendrier">
+                                <div class="portfolio-hover" style="background: #574128;"></div>
+                                <img class="img-fluid evenements-img" style="max-width:95%;"  src="/static/img/landingpage/EVENEMENTS.png" alt="Evenements">
+                                <div class="portfolio-centered">evenements</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tablet and phone LANDSCAPE display  -->
+            <div ng-if="!portrait" hide-xs hide-sm hide-gt-md class="fullsize-container" layout="column">
+                <div layout="row" layout-align="space-around center"  style="height:100%;">
+                    <div layout="column" flex="35" layout-align="space-between end" style="min-height:100%;">
+                        <div class="landingpage-item-landscape">
+                            <a class="portfolio-link" data-toggle="modal" href="/restaurant/">
+                                <div class="portfolio-perm" ></div>
+                                <img class="img-fluid restaurant-img" style="max-width:95%;"  src="/static/img/landingpage/RESTAURANT.png" alt="Restaurant">
+                                <div class="portfolio-centered-perm">Restaurant</div>
+                            </a>
+                        </div>
+                        <div class="landingpage-item-landscape ">
+                            <a class="portfolio-link" data-toggle="modal" href="/boutique/">
+                                <div class="portfolio-perm"></div>
+                                <img class="img-fluid boutique-img" style="max-width:95%;"  src="/static/img/landingpage/BOUTIQUE.png" alt="Boutique">
+                                <div class="portfolio-centered-perm">Boutique</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div layout="column" flex="20" flex-offset="0" layout-align="space-between center"
+                         style="font-family:Tillana;background-color: #879860;color: white; padding: 18px 5px 0 5px; height:100%;min-height:100%;">
+                        <a class="logo-link" href="/" >
+                            <img class="img-fluid logo-landscape" style="" src="/static/img/logo.png" alt="CafeYoga">
+                        </a>
+                        <div layout="column">
+                            <div ng-if="!(account|isEmpty)">
+                                <div layout="column" style="margin-bottom:15%;">
+                                    <h4 class="text-centered landingpage-link-text" style="color:white;text-transform: uppercase;">{{account.first_name}} {{account.last_name}}</h4>
+                                    <md-button ng-click="logout()"
+                                               class=""
+                                               style="min-width:50px; padding-right: 10px;padding-left: 10px; margin: auto;">
+                                        <md-icon md-font-icon="material-icons"
+                                                 ng-click="logout()"
+                                                 class="landingpage-link-text"
+                                                 style="color:white; ">power_settings_new
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                            <a ng-if="(account|isEmpty)" class="landingpage-link" href="/monespace">
+                                <h4 class="text-centered landingpage-link-text" style="padding: 2% 0;color:white;text-transform: uppercase;margin-bottom:15%;"> Mon compte </h4>
+                            </a>
+                            <a class="landingpage-link-md" href="/presentation">
+                                <h4 class="landingpage-link-text text-centered"
+                                    style="padding: 0 0;color:white;text-transform: uppercase; margin-bottom:10%;"> Qui sommes nous ? </h4>
+                            </a>
+                            <a class="landingpage-link-md" href="/contact">
+                                <h4 class="landingpage-link-text text-centered" style="padding: 0% 0;color:white;text-transform: uppercase;margin-bottom:10%;"> Contact </h4>
+                            </a>
+                        </div>
+                        <a class="landingpage-link-md" href="/mentions">
+                            <h4 class="landingpage-link-text text-centered"
+                                style="padding: 0% 0;color:white;text-transform: uppercase;margin-bottom:10%;"> Mentions légales
+                            </h4>
+                        </a>
+                    </div>
+                    <div layout="column" flex="35" flex-offset="0" layout-align="space-between start" style="height:48%;min-height:100%;">
+                        <div class="landingpage-item-landscape " >
+                            <a class="portfolio-link" data-toggle="modal" href="/yoga/">
+                                <div class="portfolio-perm"></div>
+                                <img class="img-fluid yoga-img" style="max-width:95%;"  src="/static/img/landingpage/YOGA.png" alt="Yoga">
+                                <div class="portfolio-centered-perm">Yoga</div>
+                            </a>
+                        </div>
+                        <div class="landingpage-item-landscape" >
+                            <a class="portfolio-link" data-toggle="modal" href="/evenements">
+                                <div class="portfolio-perm"></div>
+                                <img class="img-fluid evenements-img" style="max-width:95%;"  src="/static/img/landingpage/EVENEMENTS.png" alt="Evenements">
+                                <div class="portfolio-centered-perm">evenements</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tablet and phone  and smaller PORTRAIT display -->
+            <div ng-if="portrait" hide-gt-md class="fullsize-container" style="height:100%;" layout="column" layout="space-between center">
+                <div>
+                    <div layout="column" layout="space-between stretch" style="height:100%;" >
+                        <div layout="row" layout-align="space-around center" style="min-height:200px;">
+                            <a  class="logo-link"  href="/" style="min-width: 150px; width: 150px;height: auto;">
+                                <img class="img-fluid logo logo-sm" style="margin: 15px 0; display: block;min-width: 120px;min-height: 120px;" src="/static/img/logo.png" alt="CafeYoga">
+                            </a>
+                            <div ng-if="!(account|isEmpty)">
+                                <div layout layout-align="center center">
+                                    <a href="/settings">
+                                        <h3 class="text-centered"
+                                            style="font-size:20px;text-transform: uppercase;vertical-align:top;">
+                                            {{account.first_name}} {{account.last_name}}
+                                        </h3>
+                                    </a>
+
+                                    <md-button ng-click="logout()"
+                                               class=""
+                                               style="min-width:50px; padding-right: 10px;padding-left: 10px; margin: auto;">
+                                        <md-icon md-font-icon="material-icons"
+                                                 ng-click="logout()"
+                                                 style="color:#A87E43;vertical-align:top;">power_settings_new
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                            </div>
+                            <div ng-if="(account|isEmpty)">
+                                <div layout="column" style="margin-bottom:15%;">
+                                    <a href="/monespace">
+                                        <h3 class="text-centered" style="font-size:20px;text-transform: uppercase;">Mon Compte</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-right:0px; margin-top:10px;background-color:#fffdfa;">
+                            <md-divider ></md-divider>
+                            <md-list>
+                                <div class="landingpage-list-item"  ng-repeat="item in items">
+                                    <a class="landingpage-item" href="{{item.link}}" style="margin: auto 0;">
+                                        <md-list-item class="md-3-line" style="min-height:150px;">
+                                            <md-divider ></md-divider>
+
+                                            <img ng-src="{{item.img}}?{{$index}}" class="md-avatar" alt="{{item.who}}" style="margin: 40px 0; display: block;width: 130px;height: 130px;">
+                                            <div style="margin: auto 0 auto 50px;">
+                                                <div class="md-list-item-text">
+                                                    <h3 style="margin: auto; font-size:42px;" hide-xs>{{item.text}}</h3>
+                                                    <h3 style="margin: auto; font-size:42px;" hide-gt-xs>{{item.text_xs}}</h3>
+                                                    <p style="margin: auto; font-size:30px;">{{item.notes}}</p>
+                                                </div>
+                                            </div>
+                                            <!-- <md-divider style="width:50%;margin:auto 0;" md-inset ng-if="1"></md-divider>-->
+                                        </md-list-item>
+                                    </a>
+                                </div>
+                            </md-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Small screens LANDSCAPE display -->
+            <div ng-if="!portrait" hide-gt-sm class="fullsize-container" style="height:100%;">
+                <div   layout="column" layout="space-between center">
+                    <div>
+                        <div layout="column" layout="space-between stretch" style="height:100%;" >
+                            <!--<div layout="row" layout-align="center center" style="min-height:100px;">
+                                <a  class="logo-link"  href="/" style="min-width: 100px; width: 100px;height: auto;">
+                                    <img class="img-fluid logo logo-sm" style="margin: 15px 0; display: block;min-width: 120px;min-height: 100px;" src="/static/img/logo.png" alt="CafeYoga">
+                                </a>
+                            </div>-->
+
+                            <div style="margin-right:0px; margin-top:0px;background-color:#fffdfa;">
+                                <md-divider ></md-divider>
+                                <md-list>
+                                    <div class="landingpage-list-item"  ng-repeat="item in items">
+                                        <a class="landingpage-item" href="{{item.link}}" style="margin: auto 0;">
+                                            <md-list-item class="md-3-line" style="min-height:100px;">
+                                                <md-divider ></md-divider>
+
+                                                <img ng-src="{{item.img}}?{{$index}}" class="md-avatar" alt="{{item.who}}"
+                                                     style="margin: 20px 0; display: block;width: 50px;height: 50px;">
+                                                <div style="margin: auto 0 auto 50px;">
+                                                    <div class="md-list-item-text">
+                                                        <h3 style="margin: auto; font-size:26px;" hide-xs>{{item.text}}</h3>
+                                                        <h3 style="margin: auto; font-size:26px;" hide-gt-xs>{{item.text_xs}}</h3>
+                                                        <p style="margin: auto; font-size:22px;">{{item.notes}}</p>
+                                                    </div>
+                                                </div>
+                                                <!-- <md-divider style="width:50%;margin:auto 0;" md-inset ng-if="1"></md-divider>-->
+                                            </md-list-item>
+                                        </a>
+                                    </div>
+                                </md-list>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer hide-gt-sm ng-if="!portrait" class="cy-footer"
+                    style="background-color:#879860;left:j;width:j;/*#BBCB90;*/">
+                <div layout="row" layout-align="space-between start" class="cy-footer-links" style="margin:auto;">
+                    <!--<div layout="column" layout-align="space-between start" class="cy-footer-links" >-->
+                    <a class="cy-footer-link montserrat-sm" style="font-size:18px;" href="/presentation">Qui sommes nous ?</a>
+                    <a class="cy-footer-link montserrat-sm"  style="font-size:18px;"href="/contact">Contact</a>
+                   <!-- <a hide-xs class="cy-footer-link montserrat-sm"  style="font-size:20px;font-weight:900;"href="/galerie">Participer à notre campagne !</a>-->
+                </div>
+            </footer>
+            <div hide-gt-md ng-if="portrait" ng-include="'/static/templates/general/footer.html'"></div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+

@@ -1,0 +1,463 @@
+<div class="cy-contour-white">
+  <div class="cy-contour">
+    <div class="cy-container">
+      <div ng-include="'/static/templates/general/navbar.html'"></div>
+      <div class="main-container" style="min-height:1200px;" ng-if="!loaded">
+        <md-progress-circular
+                ng-disabled="data.transaction_successful"
+                md-mode="indeterminate"
+                style="margin: 50% auto;">
+        </md-progress-circular>
+      </div>
+      <div class="main-container" ng-if="loaded">
+        <h1 class="page-title">Bonjour {{account.first_name}}</h1>
+        <h3 class="text-centered">Votre crédit est de {{account.credits}} points</h3>
+        <div style="color:red;width: 30%;margin: 0  auto;" class="alert alert-danger" ng-show="error" ng-bind="error"/>
+        <div style="width: 30%;margin: 0  auto;" class="alert alert-success" ng-show="success" ng-bind="success"/>
+
+
+        <div layout="column" hide-gt-sm>
+          <md-button ng-click="selectUpdateProfile()" class="md-primary">
+            Mettre à jour mon profil
+          </md-button>
+          <md-button ng-click="selectLessonHistoric()" class="md-primary">
+            Voir mon historique de cours
+          </md-button>
+          <md-button ng-click="selectTransactionHistoric()" class="md-primary">
+            Voir mon historique de transaction
+          </md-button>
+        </div>
+        <div layout="column" style="margin-top:55px;" ng-cloak>
+          <div layout="row" flex style="font-size:25px;">
+            <div style="width:200px;" ng-include="'/static/templates/general/sidenav.html'"></div>
+
+            <div layout
+                 layout-align="space-between start"
+                 layout-padding
+                 style="background-color:#fffdfa;margin: 0 auto;width: 80%;">
+
+              <div layout="column" layout-align="start center" style="width: 100%; margin: 0 auto;">
+
+                <div ng-if="state.showUpdateProfile" style="width: 100%;" layout="column" layout-align="start center">
+                  <div layout layout-align="space-between start" style="width: 65%;">
+                    <div layout="column" layout-align="start center">
+                      <h3 class="text-centered"> Votre profil :</h3>
+                      <form  role="form" class="update-account-form" >
+                        <div class="form-group">
+                          <label class="quicksand-md" for="settings_nom">Nom</label>
+                          <input style="font-size:20px; border-radius: 0; background-color:#f8e4c8;"
+                                 id="settings_nom"
+                                 name="nom"
+                                 type="text"
+                                 class="form-control"
+                                 ng-model="updateProfileFields.last_name"
+                                 ng-required="1"
+                                 oninvalid="this.setCustomValidity('Champ obligatoire')"
+                                 oninput="setCustomValidity('')"
+                                 ng-change="changeForm()"/>
+                        </div>
+                        <div class="form-group">
+                          <label class="quicksand-md" for="settings_prenom">Prénom</label>
+                          <input style="font-size:20px; border-radius: 0; background-color:#f8e4c8;"
+                                 id="settings_prenom"
+                                 name="prenom"
+                                 type="text"
+                                 class="form-control"
+                                 ng-model="updateProfileFields.first_name"
+                                 ng-required="1"
+                                 oninvalid="this.setCustomValidity('Champ obligatoire')"
+                                 oninput="setCustomValidity('')"
+                                 ng-change="changeForm()"/>
+                        </div>
+                        <div class="form-group">
+                          <label class="quicksand-md" for="settings_email">Email</label>
+                          <input style="font-size:20px; border-radius: 0; background-color:#f8e4c8;"
+                                 id="settings_email"
+                                 name="email"
+                                 type="email"
+                                 class="form-control"
+                                 ng-model="updateProfileFields.email"
+                                 ng-required="1"
+                                 oninvalid="this.setCustomValidity('Champ obligatoire')"
+                                 oninput="setCustomValidity('')"
+                                 ng-change="changeForm()"/>
+                        </div>
+                        <div class="form-group" layout="column"
+                             layout-align="top center"
+                             style="margin-top:15px;">
+                          <md-button ng-click="updateProfileNames()"
+                                     class="button-type-submit md-raised md-primary">
+                            Mettre à jour mon profil
+                          </md-button>
+                        </div>
+                      </form>
+                    </div>
+                    <div layout="column" layout-align="start center">
+                      <h3 class="text-centered"> Votre mot de passe :</h3>
+                      <div class="form-group">
+                        <label class="quicksand-md" for="settings_old_password">Ancien mot de passe</label>
+                        <input style="font-size:20px; border-radius: 0; background-color:#f8e4c8;"
+                               id="settings_old_password"
+                               name="pwd1"
+                               type="password"
+                               class="form-control"
+                               ng-model="updateProfileFields.old_password"
+                               ng-required="1"
+                               oninvalid="this.setCustomValidity('Champ obligatoire')"
+                               oninput="setCustomValidity('')"
+                               ng-change="changeForm()"/>
+                      </div>
+                      <div class="form-group">
+                        <label class="quicksand-md" for="settings_password1">Nouveau mot de passe</label>
+                        <input style="font-size:20px; border-radius: 0; background-color:#f8e4c8;"
+                               id="settings_password1"
+                               name="pwd1"
+                               type="password"
+                               class="form-control"
+                               ng-model="updateProfileFields.password"
+                               ng-required="1"
+                               oninvalid="this.setCustomValidity('Champ obligatoire')"
+                               oninput="setCustomValidity('')"
+                               ng-change="changeForm()"/>
+                      </div>
+                      <div class="form-group">
+                        <label class="quicksand-md" for="settings_password2">Confirmer votre mot de passe</label>
+                        <input style="font-size:20px; border-radius: 0; background-color:#f8e4c8;"
+                               id="settings_password2"
+                               name="pwd2"
+                               type="password"
+                               class="form-control"
+                               ng-model="updateProfileFields.confirmation_password"
+                               ng-required="1"
+                               oninvalid="this.setCustomValidity('Champ obligatoire')"
+                               oninput="setCustomValidity('')"
+                               ng-change="changeForm()"/>
+                      </div>
+                      <div class="form-group" layout="column"
+                           layout-align="top center"
+                           style="margin-top:0px;">
+                        <md-button ng-click="updatePassword()"
+                                   class="button-type-submit md-raised md-primary">
+                          Mettre à jour mon mot de passe
+                        </md-button>
+                      </div>
+                    </div>
+                  </div>
+                  <md-button style="margin: 30px auto 0 auto;"
+                             ng-click="deleteAccount()"
+                             class="button-type-submit md-raised md-primary">
+                    Supprimer mon compte
+                  </md-button>
+
+                  <md-button ng-if="account.is_staff"
+                             style="margin: 30px auto 0 auto;"
+                             ng-click="clickDeleteAllInDb()"
+                             class="button-type-submit md-raised md-primary">
+                    Supprimer toute la base de données !!!
+                  </md-button>
+                  <div layout="column" style="margin-top:15px;"
+                       ng-if="account.is_staff && state.askConfirmationBeforeDeletion">
+                    <p style="color:red;"> Vous êtes sur le point de supprimer toute la base de donnée. Etes vous sûr ?!</p>
+
+                    <md-button
+                            style="margin: 30px auto 0 auto;"
+                            ng-click="processDeleteAllInDb()"
+                            class="button-type-submit md-raised md-primary">
+                      Effacer
+                    </md-button>
+                    <md-button
+                            style="margin: 30px auto 0 auto;"
+                            ng-click="cancelDeleteAllInDb()"
+                            class="button-type-submit md-raised md-primary">
+                      Annuler
+                    </md-button>
+                  </div>
+
+                </div>
+                <div ng-if="state.showLessonHistoric" layout-align="top center">
+                  <div layout="column" layout-align="space-between center">
+                    <md-button
+                            style="margin: auto auto 60px auto;"
+                            ng-click="gotoCalendar()"
+                            class="md-primary md-raised cy-button">
+                      Nouvelle réservation
+                    </md-button>
+                  </div>
+                  <!--<a href="/yoga/calendrier" ><h4 style="margin-bottom:60px;" class="text-centered">Nouvelle réservation</h4></a>-->
+
+                  <h3 class="text-centered"> Votre historique de cours : </h3>
+                  <div class="historic-table">
+                    <table style="margin: 3% auto auto auto; width:100%;">
+                      <td class="table-header"> Type </td>
+                      <td class="table-header" hide-xs hide-sm hide-md> Animateur </td>
+                      <td class="table-header"> Jour </td>
+                      <td class="table-header"> Heure </td>
+                      <td class="table-header" hide-sm hide-xs hide-md> Durée </td>
+                      <td class="table-header" hide-xs> Nb de personnes </td>
+                      <td class="table-header"> Annulation </td>
+                      <tr style="padding:5%" ng-class="{'lesson-finished': lesson.meta.finished}" ng-repeat="lesson in reservedLessonsForAccount">
+                        <td> {{ lesson.type.nom }} {{ lesson.intensity.nom }}</td>
+                        <td hide-xs hide-sm hide-md> {{ lesson.animator.prenom }} {{ lesson.animator.nom }} </td>
+                        <td> {{ lesson.meta.day }} </td>
+                        <td> {{ lesson.meta.start }} </td>
+                        <td hide-sm hide-xs hide-md> {{ lesson.duration }} min</td>
+                        <td hide-xs> {{ lesson.meta.nb_persons }} </td>
+                        <td>
+                          <a ng-if="!lesson.meta.finished">
+                            <md-icon md-font-icon="material-icons"
+                                     ng-click="cancelReservation(lesson, account)">
+                              delete
+                            </md-icon>
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div ng-if="state.showTransactionHistoric" layout-align="top center">
+                  <h3 class="text-centered"> Votre historique de transactions : </h3>
+                  <div class="historic-table">
+                    <table style="margin: 3% auto auto auto; width:100%;">
+                      <td class="table-header"> Id </td>
+                      <td class="table-header"> Date </td>
+                      <td class="table-header"> Montant </td>
+                      <tr style="padding:5%"  ng-repeat="transaction in transactions">
+                        <td> {{ transaction.id }} </td>
+                        <td> {{ transaction.meta.date }} </td>
+                        <td> {{ transaction.montant }} €</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div ng-if="state.showRecharge" layout-align="top center" style="width:60%;">
+                  <div ng-controller="RechargeController as vm">
+                    <h4 ng-if="state.step_formule" class="text-centered">1/ Je choisis ma formule :</h4>
+                    <h4 ng-if="state.step_code_reduction" class="text-centered">2/ Je rentre mon code de réduction :</h4>
+                    <h4 ng-if="state.step_payment_summary" class="text-centered">3/ Mon résumé de transaction :</h4>
+                    <h4 ng-if="state.step_card_info" class="text-centered">4/ Mes informations de paiement : </h4>
+                    <!--<h4 ng-if="error && !state.step_payment_error" class="text-centered transaction-step-error">{{error}}</h4>-->
+
+                    <div style="color: red; margin: auto; width: 80%;" class="alert alert-danger" ng-show="error && !state.step_payment_error" ng-bind="error"></div>
+
+                    <section ng-if="state.step_formule" style="width:100%;" layout="column" flex layout-align="space-between center">
+                      <div class="text-container transaction-step">
+                        <div class="formule-container">
+                          <div class="formule"
+                               layout layout-align="space-between center"
+                               style="margin-bottom:40px;"
+                               ng-repeat="formule in data.formules"
+                               ng-class="{'last-formule':$last}">
+                            <div class="formule-details" style="width:60%;">
+                              <h3> Formule {{formule.nb_cours}} Cours : {{formule.montant}} €</h3>
+                              <h4 style="font-style: italic; margin-top: 5%;"> {{formule.description}} </h4>
+                            </div>
+                            <div layout="column" style="width:10%;">
+                              <div layout>
+                                <md-icon style="cursor:pointer;"
+                                         ng-click="increaseFormuleNb(formule)"
+                                         md-font-icon="material-icons">
+                                  add_circle
+                                </md-icon>
+                                <md-icon
+                                        style="cursor:pointer;"
+                                        ng-click="decreaseFormuleNb(formule)"
+                                        md-font-icon="material-icons">
+                                  remove_circle
+                                </md-icon>
+                              </div>
+                              <div style="margin:auto;"><span>{{formule.nb}}</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <md-button
+                              ng-click="chooseFormula()"
+                              ng-disabled="!data.montant_initial"
+                              class="md-primary md-raised cy-button">
+                        Suivant
+                      </md-button>
+                    </section>
+
+                    <section ng-if="state.step_code_reduction"
+                             style="margin-bottom:15%;width:100%;"
+                             layout="column" flex
+                             layout-align="space-between center">
+                      <div class="text-container transaction-step" style="padding:0 10%;">
+                        <h4 ng-if="data.reduction"
+                            style="margin-bottom : 1%; color: green;"
+                            class="text-centered"> Votre réduction : {{ data.reduction }} % !!</h4>
+
+                        <div style="width:100%; margin:auto auto 30px auto;" layout="column">
+
+                          <label class="quicksand-md text-centered" for="code_de_reduction" style="width:100%;margin:auto;">Code de Réduction</label>
+                          <input style="border : 1px solid #3f3f3f;width:30%;margin:auto;"
+                                 md-no-asterisk
+                                 id="code_de_reduction"
+                                 name="reduction"
+                                 ng-model="data.code_reduction"
+                                 aria-label="Code de Réduction"
+                                 ng-change="tryReductionCode(data.code_reduction)"/>
+                          <div ng-messages="data.$error">
+                          </div>
+                        </div>
+                      </div>
+                      <div layout="column" layout-align="center center" flex="80">
+                        <div layout layout-align="space-between center">
+                          <md-button ng-click="backToFormula()"
+                                     class="md-primary md-raised cy-button">
+                            Précédent
+                          </md-button>
+
+                          <md-button ng-click="tryReductionCodeIfAny(data.code_reduction)"
+                                     class="md-primary md-raised cy-button">
+                            Suivant
+                          </md-button>
+                        </div>
+                        <md-button ng-click="cancelPayment()"
+                                   class="md-primary md-raised cy-button">
+                          Annuler
+                        </md-button>
+                      </div>
+                    </section>
+                    <section ng-if="state.step_payment_summary"
+                             style="margin-bottom:15%;width:100%;"
+                             layout="column" flex
+                             layout-align="space-between center">
+                      <div class="text-container transaction-step" style="padding:0 10%;">
+                        <h4 ng-if="data.reduction"
+                            style="margin-bottom : 1%; color: green;"
+                            class="text-centered"> Votre réduction : {{ data.reduction }} % !!</h4>
+                        <div ng-if="data.montant_initial != data.montant_final" style="margin-bottom:50px;">
+                          <h4 class="text-centered">Montant : <span class="radioValue">{{ data.montant_initial }} €</span> </h4>
+                          <h4 class="text-centered">Réduction : <span class="radioValue">{{ data.reduction }} % </span> </h4>
+                          <h4 class="text-centered">Montant final: <span class="radioValue">{{ data.montant_final }} €</span> </h4>
+                        </div>
+                        <div ng-if="data.montant_initial == data.montant_final" style="margin-bottom:50px;">
+                          <h4 class="text-centered">Montant : <span class="radioValue">{{ data.montant_initial }} €</span> </h4>
+                        </div>
+                      </div>
+                      <div layout="column" layout-align="center center" flex="80">
+                        <div layout layout-align="space-between center">
+                          <md-button ng-click="backToReductionCode()"
+                                     class="md-primary md-raised cy-button">
+                            Précédent
+                          </md-button>
+                          <md-button ng-click="gotoPaymentForm()"
+                                     class="md-primary md-raised cy-button">
+                            Suivant
+                          </md-button>
+                        </div>
+                        <md-button ng-click="cancelPayment()"
+                                   class="md-primary md-raised cy-button">
+                          Annuler
+                        </md-button>
+                      </div>
+                    </section>
+
+                    <section ng-if="state.step_card_info"
+                             class="text-container transaction-step"
+                             style="margin-top: 20px;margin-bottom:15%;width:100%;"
+                             layout="column" flex
+                             layout-align="space-between center">
+                      <div class="text-container transaction-step" style="padding:0 10%;"><!-- class="col-md-4 col-md-offset-4" style="margin:auto;">-->
+                        <!-- Test ==> Card Number : 4242-4242-4242-4242   / Expiry : 12/18 / CVC : 999 -->
+                        <form layout="column" flex="80" flex-offset="10" stripe-form="stripeCallback">
+                          <div ng-if="checkoutForm.card.$invalid">Error: invalid card number!</div>
+                          <md-input-container>
+                            <input class="input-form"
+                                   ng-model="number"
+                                   placeholder="N° de carte"
+                                   payments-format="card"
+                                   payments-validate="card"
+                                   ng-change="changeCardFrom()"/>
+                          </md-input-container>
+                          <md-input-container>
+                            <input class="input-form"
+                                   ng-model="expiry"
+                                   placeholder="Date d'expiration"
+                                   payments-format="expiry"
+                                   payments-validate="expiry"
+                                   ng-change="changeCardFrom()" />
+                          </md-input-container>
+                          <md-input-container>
+                            <input class="input-form"
+                                   ng-model="cvc"
+                                   placeholder="CVC"
+                                   payments-format="cvc"
+                                   payments-validate="cvc"
+                                   ng-change="changeCardFrom()" />
+                          </md-input-container>
+
+                          <div layout="column" layout-align="center center" flex="80">
+                            <div layout layout-align="center center">
+                              <md-button ng-click="backToPaymentSummary()"
+                                         class="md-primary md-raised cy-button">
+                                Précédent
+                              </md-button>
+                              <md-button type="submit"
+                                         ng-click="proceedTransaction()"
+                                         class="md-primary md-raised cy-button">
+                                Payer
+                              </md-button>
+                            </div>
+                            <md-button ng-click="cancelPayment()"
+                                       class="md-primary md-raised cy-button">
+                              Annuler
+                            </md-button>
+                          </div>
+                        </form>
+                      </div>
+                    </section>
+
+                    <section ng-if="state.step_payment_in_progress"
+                             class="text-container transaction-step"
+                             style="margin-bottom:15%;width:100%;"
+                             layout="column" flex
+                             layout-align="space-between center">
+                      <h4 class="text-centered" style="margin-bottom: 150px;">Transaction en cours</h4>
+                      <div layout="row" layout-sm="column" layout-align="space-around">
+                        <md-progress-circular style="margin:auto;margin-bottom: 150px;" ng-disabled="data.transaction_successful" md-mode="indeterminate"></md-progress-circular>
+                      </div>
+
+                    </section>
+
+                    <section ng-if="state.step_payment_success"
+                             class="text-container transaction-step"
+                             style="margin-bottom: 20%;;width:100%;"
+                             layout="column" flex
+                             layout-align="space-between center">
+
+                      <h4 class="text-centered transaction-step-success" style="margin-bottom: 150px;">{{ success }}  </h4>
+                      <md-button ng-click="endPayment()"
+                                 class="md-primary md-raised cy-button">
+                        Retour
+                      </md-button>
+                    </section>
+
+                    <section ng-if="state.step_payment_error"
+                             class="text-container transaction-step"
+                             style="margin-bottom: 20%;;width:100%;"
+                             layout="column" flex
+                             layout-align="space-between center">
+                      <div style="color:red;" class="alert alert-danger" ng-show="error" ng-bind="error"></div>
+                      <!--<h4 class="text-centered transaction-step-error" style="margin-bottom: 150px;">{{ error }}  </h4>-->
+                      <md-button ng-click="endPayment()"
+                                 class="md-primary md-raised cy-button">
+                        Retour
+                      </md-button>
+                    </section>
+                  </div>
+                </div>
+
+
+              </div>
+              <div flex></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-include="'/static/templates/general/footer.html'"></div>
+  </div>
+</div>

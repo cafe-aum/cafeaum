@@ -1,0 +1,26 @@
+<div class="cy-contour-white">
+    <div class="cy-contour">
+        <div class="cy-container">
+            <div ng-include="'/static/templates/general/navbar.html'"></div>
+            <div class="main-container" style="margin-top:150px;">
+                <div layout>
+                    <div style="width:200px;" ng-include="'/static/templates/general/sidenav.html'"></div>
+                    <div layout="column" flex>
+                        <h2 class="text-centered">Nos tarifs</h2>
+                        <div layout="column" flex style="margin: 50px 10%;padding: 0 2%;">
+
+                            <div class="tarif"
+                                 layout layout-align="space-between center" ng-repeat="tarif in tarifs" style="margin-bottom:60px;">
+                                <h4>{{tarif.description}}</h4>
+                                <h4>{{tarif.prix}} €</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div ng-include="'/static/templates/general/footer.html'"></div>
+    </div>
+</div>

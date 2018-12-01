@@ -1,0 +1,453 @@
+{% load staticfiles %}
+.landingpage-container-square{
+  width: 100%;
+  #padding : 0 20% 0 20%;
+  background: #eaecef;
+}
+
+.flex-container{
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  max-height:50%;
+}
+
+.flex-column{
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+}
+.flex-column > *{
+  flex: 1 100%;
+}
+
+.links-container{
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+}
+
+.icons-container{
+  padding: 30% 0 0 0;
+  align-self: flex-end;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.icons-container > *{
+  padding: 5%;
+}
+
+.logo-landscape{
+   margin: 0 20%;
+   height:60%;
+   width:60%;
+}
+
+.line-with-icon{
+    font-size: 1rem;
+    width: inherit;
+    height: 1.2rem;
+    vertical-align: middle;
+}
+/*
+@media only screen
+and (max-width : 320px)
+{
+  .logo-landscape{
+     margin: 0 20%;
+     height:60%;
+     width:60%;
+  }
+}
+
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px)
+{
+  .logo-landscape{
+     margin: 0 20%;
+     height:60%;
+     width:60%;
+  }
+}
+
+@media only screen
+and (min-width  : 480px)
+and (max-width : 768px)
+{
+  .logo-landscape{
+     margin: 0 20%;
+     height:60%;
+     width:60%;
+  }
+}
+
+@media only screen
+and (min-width  : 768px)
+{
+  .logo-landscape{
+     margin: 0 20%;
+     height:60%;
+     width:60%;
+  }
+}
+*/
+.restaurant-img{
+    content : url('/static/img/landingpage/RESTAURANT.png');
+}
+.boutique-img{
+    content : url('/static/img/landingpage/BOUTIQUE.png');
+}
+
+
+
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px)
+{
+.landingpage-link-text{
+    font-size:85%;
+}
+}
+
+@media only screen
+and (min-width  : 480px)
+and (max-width : 768px)
+{
+.landingpage-link-text{
+    font-size:90%;
+}
+}
+
+@media only screen
+and (min-width  : 768px)
+and (max-width : 1200px)
+{
+.landingpage-link-text{
+    font-size:95%;
+}
+}
+
+@media only screen
+and (min-width  : 1200px)
+and (max-width : 1500px)
+{
+.landingpage-link-text{
+    font-size:110%;
+}
+}
+
+@media only screen
+and (min-width  : 1500px)
+{
+.landingpage-link-text{
+    font-size:120%;
+}
+}
+
+
+
+
+.landingpage-container-square:after {
+  content: "";
+  display: block;
+  text-align: center;
+}
+
+.landingpage-link{
+   font-size:15px;
+   text-transform: uppercase;
+   color: white;
+   cursor: pointer;
+   text-decoration: none;
+}
+
+.landingpage-link-md{
+   font-size:13px;
+   text-transform: uppercase;
+   color: white;
+   cursor: pointer;
+   text-decoration: none;
+}
+
+.landingpage-link:hover{
+   color: #5d3b0a;
+   text-decoration: none;
+}
+
+.personal-space-link{
+   color: #3F3F3F;
+   max-height: 30%;
+   padding: 20% 0 10% 0;
+   font-family:"PT Sans";
+   font-size: 300%;
+   -webkit-transition: color 1s, font-size 1s;
+   -moz-transition: color 1s, font-size 1s;
+   -o-transition: color 1s, font-size 1s;
+   transition: color 1s, font-size 1s;
+   cursor: pointer;
+   text-decoration: none;
+}
+
+.personal-space-link:hover{
+   color: #137b72;
+   font-size: 300%;
+   text-decoration: none;
+}
+.personal-space-link:visited{
+   text-decoration: none;
+}
+
+.personal-space-link:active{
+   color: red;
+   text-decoration: none;
+}
+
+
+.mentions-link{
+   color: #3F3F3F;
+   font-family:"Bellefair";
+   font-size:115%;
+}
+
+.mentions-link:hover{
+   color: #137b72;
+}
+
+.landingpage-footer{
+   margin:25% 0 0 0;
+   float: bottom;
+}
+
+.top{
+   float: top;
+   margin:0 0 5% 0;
+}
+
+.bottom{
+  float: bottom;
+  margin:5% 0 0 0;
+}
+
+.left{
+  float: left;
+  margin:0;
+
+}
+.right{
+  float: right;
+  margin:0;
+}
+
+.center{
+   text-align:center;
+   margin:0 auto;
+}
+
+@font-face {
+  font-family: 'Arquitectura';
+  src: url('resources/archtura.ttf') format('truetype');
+}
+
+.landingpage-item-md{
+   max-width:75%;
+   margin: 0 auto;
+}
+.landingpage-first-line{
+   min-height: 3.5%;
+}
+
+.landingpage-item,
+.landingpage-item-md,
+.landingpage-item-landscape,  {
+
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  }
+  .landingpage-item .portfolio-link,
+  .landingpage-item-md .portfolio-link,
+  .landingpage-item-landscape .portfolio-link{
+    position: relative;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    transition: all ease 0.5s;}
+
+    .landingpage-item .portfolio-link:hover .portfolio-hover{
+        opacity: 0.6;
+    }
+
+    .landingpage-item-md .portfolio-link .portfolio-perm,
+    .landingpage-item-landscape .portfolio-link .portfolio-perm{
+      position: absolute;
+      width: 90%;
+      height: 94%;
+      top:3%;
+      left:5%;
+      -webkit-transition: all ease 0.5s;
+      -moz-transition: all ease 0.5s;
+      transition: all ease 0.5s;
+      background:  #bfcb91;
+      opacity: 0.4;
+    }
+
+    .landingpage-item .portfolio-link .portfolio-hover {
+      position: absolute;
+      width: 86%;
+      height: 86%;
+      top:7%;
+      left:7%;
+      -webkit-transition: all ease 0.5s;
+      -moz-transition: all ease 0.5s;
+      transition: all ease 0.5s;
+      opacity: 0;
+      background:  #bfcb91;/*rgba(200, 200, 200, 0.7);/*rgba(146, 154, 168, 0.9); */}
+      .landingpage-item .portfolio-link .portfolio-hover:hover {
+        opacity: 0.6;}
+
+       .landingpage-item .portfolio-link:hover .portfolio-centered{
+          color: #fffdfa;
+          display:block;
+          text-transform:uppercase;
+       }
+
+      .landingpage-item .portfolio-link .portfolio-centered{
+         display:none;
+         position: absolute;
+         font-family: Arquitectura;
+         font-size: 65px;
+         /*font-weight: bold;*/
+         color: #fffdfa;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         -webkit-transition: all ease 0.5s;
+         -moz-transition: all ease 0.5s;
+         transition: all ease 0.5s;}
+
+      .landingpage-item-md .portfolio-link .portfolio-centered-perm,
+      .landingpage-item-landscape .portfolio-link .portfolio-centered-perm{
+         display:block;
+         position: absolute;
+         font-family: Arquitectura;
+         font-size: 65px;
+         text-transform:uppercase;
+         color: #fffdfa;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         -webkit-transition: all ease 0.5s;
+         -moz-transition: all ease 0.5s;
+         transition: all ease 0.5s;}
+
+      .landingpage-item-landscape .portfolio-link .portfolio-centered-perm{
+         font-size: 40px;
+      }
+
+      .landingpage-item-landscape{
+         width: 87%;
+      }
+
+      .landingpage-item .portfolio-link img{
+        max-width: 100%;
+        max-height: 100%; }
+
+#collections * {
+  z-index: 2; }
+
+
+
+
+
+
+/*    NEW     !!!  */
+.fullsize-fixed{
+  width:100%;
+  height: 100%;
+  overflow:hidden;
+  position:fixed;
+  left:0;
+  top:0;
+}
+
+.fullsize-contour-white{
+   background-color:#fffdfa;
+   padding: 15px;
+   width:100%;
+   height:100%;
+}
+
+.fullsize-contour-marron{
+   background-color:#cda772;
+   padding: 15px;
+   position:fixed;
+   height:calc(100% - 30px);
+   width:calc(100% - 30px);
+}
+
+.contour-marron{
+   background-color:#cda772;
+   padding: 15px;
+   position:relative;
+   height:100% ;/*
+   width:calc(100% - 30px);*/
+}
+
+.fullsize-container{
+   background-color: #fffdfa;
+   width:100%;
+   height:100%;
+   max-height:100%;
+   padding: 30px 30px;
+}
+
+.cy-container{
+   background-color: #fffdfa;
+   width:100%;
+   /*position:relative;*/
+}
+
+.landinpage-container-white{
+   background-color: #fffdfa;
+}
+
+
+.landinpage-white-col{
+   width: 5%;
+   height: 90%;
+
+}
+
+.landinpage-img-col{
+   background-color: #cda772;/*#fff8ed;*/
+}
+
+.landinpage-central-col{
+   background-color: #768a40;
+   text-align: center;
+}
